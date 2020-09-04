@@ -53,7 +53,7 @@ const MainPage = (props) => {
           justify="end"
           gap="small"
         >
-          <Avatar size="medium" src={props.profile[0].url} />
+          <Avatar size="medium" src={props.profile[0]?.url} />
           <AboutMe />
         </Box>
       </Header>
