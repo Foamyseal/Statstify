@@ -232,7 +232,6 @@ const MainPage = (props) => {
       </Box>
       <Footer align="center" pad="medium">
         <Text>Copyright Martin Au-yeung</Text>
-        <Anchor label="About" />
       </Footer>
     </Grommet>
   );

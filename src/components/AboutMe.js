@@ -12,7 +12,7 @@ const AboutMe = (props) => {
 
   return (
     <Box>
-      <Button label="About/Logout" onClick={() => setShow(true)} />
+      <Button label="About" onClick={() => setShow(true)} />
       {show && (
         <Layer
           onEsc={() => setShow(false)}
@@ -35,6 +35,7 @@ const AboutMe = (props) => {
               href="https://www.linkedin.com/in/martinauyeung/"
             />
             <Text> Report all issues on Github! </Text>
+            <Text> To logout, simply close the browser or refresh the page.</Text>
           </Box>
         </Layer>
       )}
