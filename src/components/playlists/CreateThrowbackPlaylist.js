@@ -14,42 +14,33 @@ var playlistDescription = "";
 var playlistPrivacy = null;
 
 const CreateThrowbackPlaylist = (props) => {
-
   const userID = props.userID;
   const token = props.token;
-  const tbArtistTracks = props.tbArtistTracks.filter(filterDates); 
+  const tbArtistTracks = props.tbArtistTracks.filter(filterDates);
   const [show, setShow] = useState();
   const [value, setValue] = useState("public");
 
-  console.log(tbArtistTracks);
-
   function inputHandler1() {
     playlistName = document.getElementById("name").value;
-    console.log(playlistName);
   }
 
   function inputHandler2() {
     playlistDescription = document.getElementById("description").value;
-    console.log(playlistDescription);
   }
-  
+
   function privacyHandler(value) {
-    console.log(value)
     if (value === "private") {
       playlistPrivacy = false;
     } else {
-      playlistPrivacy = true; 
+      playlistPrivacy = true;
     }
   }
-  
 
-  
   function filterDates(date) {
     var d1 = Date.parse(date.album.release_date);
     var d2 = Date.parse("2017-09-01");
     return d2 >= d1;
   }
-
 
   function onClickHandler() {
     inputHandler1();

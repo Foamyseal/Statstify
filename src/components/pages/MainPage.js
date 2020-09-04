@@ -4,7 +4,6 @@ import {
   Heading,
   Text,
   Footer,
-  Anchor,
   Header,
   Avatar,
   Box,
@@ -41,6 +40,17 @@ const MainPage = (props) => {
     return d2 >= d1;
   }
 
+  function avatarNullCheck () {
+    if (props.profile[0].url == null) {
+      return "//:0"; 
+    }
+    else{
+      return props.profile[0].url; 
+    }
+  }
+
+  console.log(props.profile.url)
+
   console.log(props.artistItems)
   return (
     <Grommet theme={theme} full>
@@ -53,7 +63,7 @@ const MainPage = (props) => {
           justify="end"
           gap="small"
         >
-          <Avatar size="medium" src={props.profile[0]?.url} />
+          <Avatar size="medium" src={avatarNullCheck()} />
           <AboutMe />
         </Box>
       </Header>

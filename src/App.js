@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import * as $ from "jquery";
 import "../src/App.css";
 import MainPage from "./components/pages/MainPage";
-import LoginPage from "./components/pages/LoginPage"
-
+import LoginPage from "./components/pages/LoginPage";
 
 const hash = window.location.hash
   .substring(1)
@@ -63,10 +62,7 @@ class App extends Component {
       playlistItems: {
         id: "",
       },
-      topArtistTracks: {
-
-      },
-     
+      topArtistTracks: {},
     };
     this.getTopSongs = this.getTopSongs.bind(this);
     this.getTopArtists = this.getTopArtists.bind(this);
@@ -117,7 +113,7 @@ class App extends Component {
     });
   }
 
-   getTopArtists(token) {
+  getTopArtists(token) {
     // API call using AJAX and JQUERY to get user TOP Artists
     $.ajax({
       url: "https://api.spotify.com/v1/me/top/artists?time_range=short_term",
@@ -171,8 +167,8 @@ class App extends Component {
     });
   }
 
- getThrowback(token) {
-   $.ajax({
+  getThrowback(token) {
+    $.ajax({
       url:
         "https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=50",
       type: "GET",
@@ -183,7 +179,6 @@ class App extends Component {
         console.log(data);
         if (!data) {
           this.setState({
-            
             no_data: true,
           });
         }
@@ -195,7 +190,6 @@ class App extends Component {
     });
   }
 
-
   async makeTopArtistPlaylist(
     playlistName,
     playlistDescription,
@@ -204,13 +198,14 @@ class App extends Component {
     token,
     artistItems
   ) {
-
     // console.log(playlistName);
     console.log(artistItems);
 
-
     var trackList1 = await $.ajax({
-      url: "https://api.spotify.com/v1/artists/" + this.state.artistItems[0].id + "/top-tracks?country=CA",
+      url:
+        "https://api.spotify.com/v1/artists/" +
+        this.state.artistItems[0].id +
+        "/top-tracks?country=CA",
       type: "GET",
       beforeSend: (xhr) => {
         xhr.setRequestHeader("Authorization", "Bearer " + token);
@@ -227,8 +222,11 @@ class App extends Component {
       },
     });
 
-   var trackList2 = await $.ajax({
-      url: "https://api.spotify.com/v1/artists/" + this.state.artistItems[1].id + "/top-tracks?country=CA",
+    var trackList2 = await $.ajax({
+      url:
+        "https://api.spotify.com/v1/artists/" +
+        this.state.artistItems[1].id +
+        "/top-tracks?country=CA",
       type: "GET",
       beforeSend: (xhr) => {
         xhr.setRequestHeader("Authorization", "Bearer " + token);
@@ -244,9 +242,11 @@ class App extends Component {
       },
     });
 
-    
     var trackList3 = await $.ajax({
-      url: "https://api.spotify.com/v1/artists/" + this.state.artistItems[2].id + "/top-tracks?country=CA",
+      url:
+        "https://api.spotify.com/v1/artists/" +
+        this.state.artistItems[2].id +
+        "/top-tracks?country=CA",
       type: "GET",
       beforeSend: (xhr) => {
         xhr.setRequestHeader("Authorization", "Bearer " + token);
@@ -262,15 +262,13 @@ class App extends Component {
       },
     });
 
-     var tracklistID1 = trackList1.tracks.map(element => element.uri); 
-     var tracklistID2 = trackList2.tracks.map(element => element.uri);
-     var tracklistID3 = trackList3.tracks.map(element => element.uri)
-  
+    var tracklistID1 = trackList1.tracks.map((element) => element.uri);
+    var tracklistID2 = trackList2.tracks.map((element) => element.uri);
+    var tracklistID3 = trackList3.tracks.map((element) => element.uri);
 
     var tracklistData = tracklistID1.concat(tracklistID2, tracklistID3);
-    
-    console.log(tracklistData);
 
+    console.log(tracklistData);
 
     var playlistData = {
       name: playlistName,
@@ -282,7 +280,7 @@ class App extends Component {
 
     console.log(playlistData);
 
-     var playlistID = await $.ajax({
+    var playlistID = await $.ajax({
       url: "https://api.spotify.com/v1/users/" + userID + "/playlists",
       type: "POST",
       data: JSON.stringify(playlistData),
@@ -297,7 +295,7 @@ class App extends Component {
           playlistItems: data.id,
           no_data: false,
         });
-        console.log(data.id)
+        console.log(data.id);
         return;
       },
       error: function (err) {
@@ -318,12 +316,12 @@ class App extends Component {
       },
       success: (data) => {
         console.log(data);
-        alert("playlist made! check spotify :)")
-       },
-        error: function (err) {
-          console.log("didn;t worf");
-          console.log(err);
-          return;
+        alert("playlist made! check spotify :)");
+      },
+      error: function (err) {
+        console.log("didn;t worf");
+        console.log(err);
+        return;
       },
     });
   }
@@ -336,13 +334,12 @@ class App extends Component {
     token,
     songItems
   ) {
-
     // console.log(playlistName);
     // console.log(token);
     console.log(songItems);
-    
+
     console.log(playlistPrivacy);
-  var songTracklist = songItems.map(element => element.uri)
+    var songTracklist = songItems.map((element) => element.uri);
 
     var playlistData = {
       name: playlistName,
@@ -350,12 +347,12 @@ class App extends Component {
       public: playlistPrivacy,
     };
 
-    console.log(playlistPrivacy)
+    console.log(playlistPrivacy);
     // console.log(trackList);
 
     console.log(playlistData);
 
-     var playlistID = await $.ajax({
+    var playlistID = await $.ajax({
       url: "https://api.spotify.com/v1/users/" + userID + "/playlists",
       type: "POST",
       data: JSON.stringify(playlistData),
@@ -385,12 +382,12 @@ class App extends Component {
       },
       success: (data) => {
         console.log(data);
-        alert("playlist made! check spotify :)")
-       },
-        error: function (err) {
-          console.log("didn't work");
-          console.log(err);
-          return;
+        alert("playlist made! check spotify :)");
+      },
+      error: function (err) {
+        console.log("didn't work");
+        console.log(err);
+        return;
       },
     });
   }
@@ -403,12 +400,11 @@ class App extends Component {
     token,
     tbArtistTracks
   ) {
-
     // console.log(playlistName);
     // console.log(token);
     console.log(tbArtistTracks);
 
-   var throwbackTracklist = tbArtistTracks.map(element => element.uri)
+    var throwbackTracklist = tbArtistTracks.map((element) => element.uri);
 
     var playlistData = {
       name: playlistName,
@@ -420,7 +416,7 @@ class App extends Component {
 
     console.log(playlistData);
 
-     var playlistID = await $.ajax({
+    var playlistID = await $.ajax({
       url: "https://api.spotify.com/v1/users/" + userID + "/playlists",
       type: "POST",
       data: JSON.stringify(playlistData),
@@ -450,12 +446,12 @@ class App extends Component {
       },
       success: (data) => {
         console.log(data);
-        alert("playlist made! check spotify :)")
-       },
-        error: function (err) {
-          console.log("didn't work");
-          console.log(err);
-          return;
+        alert("playlist made! check spotify :)");
+      },
+      error: function (err) {
+        console.log("didn't work");
+        console.log(err);
+        return;
       },
     });
   }
@@ -483,9 +479,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        {!this.state.token && (
-         <LoginPage />
-        )}
+        {!this.state.token && <LoginPage />}
         {this.state.token && !this.state.no_data && mainPage}
         {this.state.no_data && (
           <p>
