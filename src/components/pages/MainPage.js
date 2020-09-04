@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Grommet,
-  Heading,
-  Text,
-  Footer,
-  Header,
-  Avatar,
-  Box,
-} from "grommet";
+import { Grommet, Heading, Text, Footer, Header, Avatar, Box } from "grommet";
 import { Down } from "grommet-icons";
 import CreateArtistPlaylists from "../playlists/CreateArtistPlaylists";
 import CreateTopSongPlaylist from "../playlists/CreateTopSongPlaylist";
@@ -26,32 +18,20 @@ const theme = {
 };
 
 const MainPage = (props) => {
-  // console.log(props);
-  console.log(props.songItems);
-  // console.log(props.artistItems[1]);
-  // console.log(props.songItems[0]);
-  // console.log(props.userID);
-  // console.log(props.artistItems[0].uri);
-  console.log(props.tbArtistTracks);
-
   function filterDates(date) {
     var d1 = Date.parse(date.album.release_date);
     var d2 = Date.parse("2018-09-01");
     return d2 >= d1;
   }
 
-  function avatarNullCheck () {
+  function avatarNullCheck() {
     if (props.profile[0].url == null) {
-      return "//:0"; 
-    }
-    else{
-      return props.profile[0].url; 
+      return "//:0";
+    } else {
+      return props.profile[0].url;
     }
   }
 
-  console.log(props.profile.url)
-
-  console.log(props.artistItems)
   return (
     <Grommet theme={theme} full>
       <Header gap="medium" margin="small">
@@ -120,7 +100,7 @@ const MainPage = (props) => {
               src={props.artistItems[1]?.images[0].url}
               onClick={() => window.open(props.artistItems[1].uri, "_self")}
             />
-            
+
             <Text size="large" margin="medium" weight="bold">
               {props.artistItems[1]?.name}
             </Text>
