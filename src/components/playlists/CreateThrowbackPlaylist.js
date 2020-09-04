@@ -11,7 +11,7 @@ import {
 
 var playlistName = "";
 var playlistDescription = "";
-var playlistPrivacy = Boolean;
+var playlistPrivacy = null;
 
 const CreateThrowbackPlaylist = (props) => {
 
@@ -32,12 +32,16 @@ const CreateThrowbackPlaylist = (props) => {
     playlistDescription = document.getElementById("description").value;
     console.log(playlistDescription);
   }
-
-  function privacyHandler(option) {
-    if (option !== "public") {
-      playlistPrivacy = true;
+  
+  function privacyHandler(value) {
+    console.log(value)
+    if (value === "private") {
+      playlistPrivacy = false;
+    } else {
+      playlistPrivacy = true; 
     }
   }
+  
 
   
   function filterDates(date) {
@@ -50,7 +54,6 @@ const CreateThrowbackPlaylist = (props) => {
   function onClickHandler() {
     inputHandler1();
     inputHandler2();
-    privacyHandler();
     props.makeThrowbackPlaylist(
       playlistName,
       playlistDescription,
@@ -86,6 +89,7 @@ const CreateThrowbackPlaylist = (props) => {
                 value={value}
                 id="privacy"
                 onChange={({ option }) => setValue(option)}
+                onSelect={privacyHandler(value)}
               />
             </Box>
             <Box pad="small" width="medium">

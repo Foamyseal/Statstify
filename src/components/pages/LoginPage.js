@@ -1,5 +1,5 @@
 import React from "react";
-import { Grommet, Heading, Paragraph, Button, Box, Text, Main } from "grommet";
+import { Grommet, Heading, Button, Box, Text, Main } from "grommet";
 
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 const clientId = "4218105ab20743ea80387bf1a7f82bf9";
@@ -30,7 +30,7 @@ const LoginPage = (props) => {
         animation="fadeIn"
         height="xxlarge"
       >
-        <Box margin={{vertical: "400px"}} align="center" justify="center">
+        <Box margin={{vertical: "300px"}} align="center" justify="center">
           <Heading size="large" align="center">Lullaby</Heading>
           <Text level="4" margin={{bottom: "30px"}}align="center"> A Spotify Statistics Site</Text>
           <Button

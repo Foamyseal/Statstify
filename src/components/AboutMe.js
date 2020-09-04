@@ -5,9 +5,6 @@ import {
   Button,
   Box,
   Heading,
-  FormField,
-  TextInput,
-  Select,
 } from "grommet";
 
 const AboutMe = (props) => {

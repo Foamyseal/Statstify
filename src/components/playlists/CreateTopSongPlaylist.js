@@ -11,7 +11,7 @@ import {
 
 var playlistName = "";
 var playlistDescription = "";
-var playlistPrivacy = Boolean;
+var playlistPrivacy = null;
 
 const CreateTopSongPlaylist = (props) => {
 
@@ -31,17 +31,22 @@ const CreateTopSongPlaylist = (props) => {
     console.log(playlistDescription);
   }
 
-  function privacyHandler(option) {
-    setValue(option);
-    if (option !== "public") {
+  function privacyHandler(value) {
+    console.log(value)
+    if (value === "private") {
       playlistPrivacy = false;
+    } else {
+      playlistPrivacy = true; 
     }
   }
+
+  
+  console.log(value);
+  console.log(playlistPrivacy);
 
   function onClickHandler() {
     inputHandler1();
     inputHandler2();
-    privacyHandler();
     props.makeTopSongsPlaylist(
       playlistName,
       playlistDescription,
@@ -61,7 +66,7 @@ const CreateTopSongPlaylist = (props) => {
           onEsc={() => setShow(false)}
           onClickOutside={() => setShow(false)}
         >
-          <FormField label="Playlist Name">
+          <FormField label="Make Playlist out of Current Top Songs">
             <Box pad="medium">
               <Text> Playlist Name </Text>
               <TextInput id="name" />
@@ -76,6 +81,8 @@ const CreateTopSongPlaylist = (props) => {
                 options={["public", "private"]}
                 value={value}
                 id="privacy"
+                onChange={({ option }) => setValue(option)}
+                onSelect={privacyHandler(value)}
               />
             </Box>
             <Box pad="small" width="medium">

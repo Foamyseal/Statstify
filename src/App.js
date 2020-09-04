@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import * as $ from "jquery";
-import MainPage from "./components/pages/MainPage";
-import { Grommet, Heading, Paragraph, Button, Box, Text, Main } from "grommet";
 import "../src/App.css";
-import { data } from "jquery";
-import TopArtistPlaylist from "./components/playlists/CreateArtistPlaylists";
+import MainPage from "./components/pages/MainPage";
 import LoginPage from "./components/pages/LoginPage"
 
 
@@ -343,7 +340,8 @@ class App extends Component {
     // console.log(playlistName);
     // console.log(token);
     console.log(songItems);
-
+    
+    console.log(playlistPrivacy);
   var songTracklist = songItems.map(element => element.uri)
 
     var playlistData = {
@@ -352,6 +350,7 @@ class App extends Component {
       public: playlistPrivacy,
     };
 
+    console.log(playlistPrivacy)
     // console.log(trackList);
 
     console.log(playlistData);
