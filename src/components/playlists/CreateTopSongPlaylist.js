@@ -14,35 +14,28 @@ var playlistDescription = "";
 var playlistPrivacy = null;
 
 const CreateTopSongPlaylist = (props) => {
-
   const userID = props.userID;
   const token = props.token;
-  const songItems = props.songItems; 
+  const songItems = props.songItems;
   const [show, setShow] = useState();
   const [value, setValue] = useState("public");
 
   function inputHandler1() {
     playlistName = document.getElementById("name").value;
-    console.log(playlistName);
   }
 
   function inputHandler2() {
     playlistDescription = document.getElementById("description").value;
-    console.log(playlistDescription);
   }
 
   function privacyHandler(value) {
-    console.log(value)
+    console.log(value);
     if (value === "private") {
       playlistPrivacy = false;
     } else {
-      playlistPrivacy = true; 
+      playlistPrivacy = true;
     }
   }
-
-  
-  console.log(value);
-  console.log(playlistPrivacy);
 
   function onClickHandler() {
     inputHandler1();

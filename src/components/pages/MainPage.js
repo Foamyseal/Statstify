@@ -7,6 +7,7 @@ import RenderCards from "../cards/RenderCards";
 import CreateThrowbackPlaylist from "../playlists/CreateThrowbackPlaylist";
 import AboutMe from "../AboutMe";
 
+
 const theme = {
   global: {
     font: {
@@ -25,7 +26,7 @@ const MainPage = (props) => {
   }
 
   function avatarNullCheck() {
-    if (props.profile[0].url == null) {
+    if (!props.profile[0]?.url) {
       return "//:0";
     } else {
       return props.profile[0].url;
@@ -82,13 +83,14 @@ const MainPage = (props) => {
             <Text size="xlarge" margin="medium" weight="bold">
               #1
             </Text>
-            <Avatar
-              size="375px"
-              src={props.artistItems[0].images[0].url}
+            <Avatar id="avatar"
+              size="300px"
+    
+              src={props.artistItems[0]?.images[0].url}
               onClick={() => window.open(props.artistItems[0].uri, "_self")}
             />
             <Text size="large" margin="medium" weight="bold">
-              {props.artistItems[0].name}{" "}
+              {props.artistItems[0]?.name}{" "}
             </Text>
           </Box>
           <Box direction="column" align="center" gap="small">
@@ -96,7 +98,7 @@ const MainPage = (props) => {
               #2
             </Text>
             <Avatar
-              size="375px"
+              size="300px"
               src={props.artistItems[1]?.images[0].url}
               onClick={() => window.open(props.artistItems[1].uri, "_self")}
             />
@@ -110,7 +112,7 @@ const MainPage = (props) => {
               #3
             </Text>
             <Avatar
-              size="375px"
+              size="300px"
               src={props.artistItems[2]?.images[0].url}
               onClick={() => window.open(props.artistItems[2].uri, "_self")}
             />
