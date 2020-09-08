@@ -60,7 +60,7 @@ const CreateArtistPlaylists = (props) => {
           onEsc={() => setShow(false)}
           onClickOutside={() => setShow(false)}
         >
-          <FormField label="Playlist Name">
+          <FormField label="Create playlist based on Current Top Artists">
             <Box pad="medium">
               <Text> Playlist Name </Text>
               <TextInput id="name" />

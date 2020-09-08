@@ -131,10 +131,14 @@ const MainPage = (props) => {
         justify="center"
         background="neutral-3"
       >
+        <Box justify="left" direction="row-responsive" >
+      </Box>
+        <Box pad="medium" direction="row-responsive">
         <UserAudioStats
           audioFeatures={props.audioFeatures}
           tbAudioFeatures={props.tbAudioFeatures}
         />
+      </Box>
       </Box>
 
       <Box pad="large" background="accent-1">

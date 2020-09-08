@@ -59,7 +59,7 @@ const CreateTopSongPlaylist = (props) => {
           onEsc={() => setShow(false)}
           onClickOutside={() => setShow(false)}
         >
-          <FormField label="Make Playlist out of Current Top Songs">
+          <FormField label="Create Playlist out of Current Top Songs">
             <Box pad="medium">
               <Text> Playlist Name </Text>
               <TextInput id="name" />

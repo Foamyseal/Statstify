@@ -3,6 +3,7 @@ import {
   Text,
   Box,
   Meter,
+  Heading
 } from "grommet";
 
 const UserAudioStats = (props) => {
@@ -43,9 +44,16 @@ const UserAudioStats = (props) => {
 
   return (
     <Box direction="row-responsive" gap="medium">
+      <Box direction="column" gap="large">
+        <Text margin={{"top": "72px"}}> Average Hypeness Level </Text>
+        <Text> How danceable is your music? </Text>
+        <Text> Average Song Tempo </Text>
+      </Box>
       <Box direction="row-responsive" gap="large">
-        <Box direction="column">
-          <Text> Current Average Song Energy </Text>
+        <Box direction="column" gap="large" >
+        <Text>
+              Current Songs
+            </Text>
           <Box direction="row-responsive" gap="medium">
             <Meter
               values={[
@@ -59,7 +67,6 @@ const UserAudioStats = (props) => {
             />
             <Text> {Math.round(trackTempoAvg(trackEnergy) * 100)} </Text>
           </Box>
-            <Text> Current Average Danceability level</Text>
             <Box direction="row-responsive" gap="medium">
               <Meter
                 color="light-2"
@@ -77,7 +84,6 @@ const UserAudioStats = (props) => {
                 {Math.round(trackDanceabilityAvg(trackDanceability) * 100)}{" "}
               </Text>
           </Box>
-          <Text> Current Average Track Tempo</Text>
           <Box direction="row-responsive" gap="medium">
             <Meter
               values={[
@@ -94,10 +100,12 @@ const UserAudioStats = (props) => {
         </Box>
       </Box>
     <Box direction="row-responsive" gap="medium">
-      <Box direction="column">
-          <Text> All-time Average Song Energy </Text>
+      <Box direction="column" gap="large">
+            <Text>
+              All-time Songs
+            </Text>
           <Box direction="row-responsive" gap="medium">
-            <Meter
+            <Meter 
               values={[
                 {
                   value: tbTrackEnergyAvg(tbTrackEnergy) * 100,
@@ -109,7 +117,6 @@ const UserAudioStats = (props) => {
             />
             <Text> {Math.round(tbTrackTempoAvg(tbTrackEnergy) * 100)} </Text>
           </Box>
-            <Text> All-time Average Danceability level</Text>
             <Box direction="row-responsive" gap="medium">
               <Meter
                 color="light-2"
@@ -127,7 +134,6 @@ const UserAudioStats = (props) => {
                 {Math.round(tbTrackDanceabilityAvg(tbTrackDanceability) * 100)}{" "}
               </Text>
           </Box>
-          <Text> All-time Average Track Tempo</Text>
           <Box direction="row-responsive" gap="medium">
             <Meter
               values={[
@@ -144,7 +150,7 @@ const UserAudioStats = (props) => {
         </Box>
       </Box>
     </Box>
-  );
+      );
 };
 
 export default UserAudioStats;

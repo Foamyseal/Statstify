@@ -64,7 +64,7 @@ const CreateThrowbackPlaylist = (props) => {
           onEsc={() => setShow(false)}
           onClickOutside={() => setShow(false)}
         >
-          <FormField label="Playlist Name">
+          <FormField label="Create Playlist based on Throwback songs">
             <Box pad="medium">
               <Text> Playlist Name </Text>
               <TextInput id="name" />
