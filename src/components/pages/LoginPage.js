@@ -21,6 +21,8 @@ const theme = {
 };
 
 const LoginPage = (props) => {
+  // login page render
+
   return (
     <Grommet theme={theme}>
       <Main
@@ -30,9 +32,16 @@ const LoginPage = (props) => {
         animation="fadeIn"
         height="xxlarge"
       >
-        <Box margin={{vertical: "300px"}} align="center" justify="center">
-          <Heading size="large" align="center">Lullaby</Heading>
-          <Text level="4" margin={{bottom: "30px"}}align="center"> A Spotify Statistics Site</Text>
+        <Box margin={{ vertical: "300px" }} align="center" justify="center">
+          <Heading size="large" align="center">
+            Lullaby
+          </Heading>
+          <Text level="4" margin={{ bottom: "20px" }} align="center">
+            Created by Martin Au-yeung
+          </Text>
+          <Text level="4" margin={{ bottom: "30px" }} align="center">
+            Learn more about your Spotify listening habits!
+          </Text>
           <Button
             primary
             align="center"
@@ -41,7 +50,7 @@ const LoginPage = (props) => {
               "%20"
             )}&response_type=token&show_dialog=true`}
           />
-        </Box>    
+        </Box>
       </Main>
     </Grommet>
   );

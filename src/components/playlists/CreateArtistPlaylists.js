@@ -14,34 +14,33 @@ var playlistDescription = "";
 var playlistPrivacy = Boolean;
 
 const CreateArtistPlaylists = (props) => {
-
   const userID = props.userID;
   const token = props.token;
-  const artistItems = props.artistItems; 
+  const artistItems = props.artistItems;
   const [show, setShow] = useState();
   const [value, setValue] = useState("public");
 
   function inputHandler1() {
     playlistName = document.getElementById("name").value;
-    console.log(playlistName);
   }
 
   function inputHandler2() {
     playlistDescription = document.getElementById("description").value;
-    console.log(playlistDescription);
   }
 
-  function privacyHandler(option) {
-    setValue(option);
-    if (option !== "public") {
+  function privacyHandler(value) {
+    console.log(value);
+    if (value === "private") {
       playlistPrivacy = false;
+    } else {
+      playlistPrivacy = true;
     }
   }
 
   function onClickHandler() {
     inputHandler1();
     inputHandler2();
-    privacyHandler();
+
     props.makeTopArtistPlaylist(
       playlistName,
       playlistDescription,
@@ -76,6 +75,8 @@ const CreateArtistPlaylists = (props) => {
                 options={["public", "private"]}
                 value={value}
                 id="privacy"
+                onChange={({ option }) => setValue(option)}
+                onSelect={privacyHandler(value)}
               />
             </Box>
             <Box pad="small" width="medium">

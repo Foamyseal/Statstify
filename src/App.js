@@ -3,6 +3,7 @@ import * as $ from "jquery";
 import "../src/App.css";
 import MainPage from "./components/pages/MainPage";
 import LoginPage from "./components/pages/LoginPage";
+import ErrorPage from "./components/pages/ErrorPage";
 
 const hash = window.location.hash
   .substring(1)
@@ -63,6 +64,22 @@ class App extends Component {
         id: "",
       },
       topArtistTracks: {},
+      audioFeatures: [
+        {
+          danceability: "",
+          energy: "",
+          acousticness: "",
+          tempo: "",
+        },
+      ],
+      tbAudioFeatures: [
+        {
+          danceability: "",
+          energy: "",
+          acousticness: "",
+          tempo: "",
+        },
+      ],
     };
     this.getTopSongs = this.getTopSongs.bind(this);
     this.getTopArtists = this.getTopArtists.bind(this);
@@ -86,19 +103,15 @@ class App extends Component {
     }
   }
 
-  getTopSongs(token) {
-    // API call using AJAX and JQUERY to get Top Songs
-    $.ajax({
+  async getTopSongs(token) {
+    // API call to get Top Songs and Audio Features
+    var songItems = await $.ajax({
       url: "https://api.spotify.com/v1/me/top/tracks?time_range=short_term",
       type: "GET",
       beforeSend: (xhr) => {
         xhr.setRequestHeader("Authorization", "Bearer " + token);
       },
       success: (data) => {
-        // console.log(data);
-        // console.log(data.items[0].album.images[0].url);
-        // console.log(data.items[1].album.images[0].url);
-        // Checks if the data is not empty
         if (!data) {
           this.setState({
             no_data: true,
@@ -111,10 +124,32 @@ class App extends Component {
         });
       },
     });
+
+    let spotifyIds = songItems.items.map(({ id }) => id);
+
+    $.ajax({
+      url: "https://api.spotify.com/v1/audio-features/?ids=" + spotifyIds,
+      type: "GET",
+      beforeSend: (xhr) => {
+        xhr.setRequestHeader("Authorization", "Bearer " + token);
+      },
+      success: (data) => {
+        if (!data) {
+          this.setState({
+            no_data: true,
+          });
+          return;
+        }
+        this.setState({
+          audioFeatures: data.audio_features,
+          no_data: false,
+        });
+      },
+    });
   }
 
   getTopArtists(token) {
-    // API call using AJAX and JQUERY to get user TOP Artists
+    // API call to get current top artists
     $.ajax({
       url: "https://api.spotify.com/v1/me/top/artists?time_range=short_term",
       type: "GET",
@@ -122,9 +157,6 @@ class App extends Component {
         xhr.setRequestHeader("Authorization", "Bearer " + token);
       },
       success: (data) => {
-        // console.log(data);
-        // console.log(data.items[0].images[0].url);
-        // Checks if the data is not empty
         if (!data) {
           this.setState({
             no_data: true,
@@ -140,7 +172,7 @@ class App extends Component {
   }
 
   getUserInfo(token) {
-    // API call using AJAX and JQUERY to get Top Songs
+    // API call to get user profile picture and username.
     $.ajax({
       url: "https://api.spotify.com/v1/me/",
       type: "GET",
@@ -148,9 +180,6 @@ class App extends Component {
         xhr.setRequestHeader("Authorization", "Bearer " + token);
       },
       success: (data) => {
-        console.log(data);
-        console.log(data.id);
-        // Checks if the data is not empty
         if (!data) {
           this.setState({
             no_data: true,
@@ -167,8 +196,9 @@ class App extends Component {
     });
   }
 
-  getThrowback(token) {
-    $.ajax({
+  async getThrowback(token) {
+    // API call to get all-time top songs
+    var tbArtistTracks = await $.ajax({
       url:
         "https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=50",
       type: "GET",
@@ -176,7 +206,6 @@ class App extends Component {
         xhr.setRequestHeader("Authorization", "Bearer " + token);
       },
       success: (data) => {
-        console.log(data);
         if (!data) {
           this.setState({
             no_data: true,
@@ -184,6 +213,29 @@ class App extends Component {
         }
         this.setState({
           tbArtistTracks: data.items,
+          no_data: false,
+        });
+      },
+    });
+
+    let spotifyTbIds = tbArtistTracks.items.map(({ id }) => id);
+
+    // API call to get audio features of all-time top songs
+    $.ajax({
+      url: "https://api.spotify.com/v1/audio-features/?ids=" + spotifyTbIds,
+      type: "GET",
+      beforeSend: (xhr) => {
+        xhr.setRequestHeader("Authorization", "Bearer " + token);
+      },
+      success: (data) => {
+        if (!data) {
+          this.setState({
+            no_data: true,
+          });
+          return;
+        }
+        this.setState({
+          tbAudioFeatures: data.audio_features,
           no_data: false,
         });
       },
@@ -198,9 +250,9 @@ class App extends Component {
     token,
     artistItems
   ) {
-    // console.log(playlistName);
-    console.log(artistItems);
+    // API call to make Top Artist Playlist
 
+    // get #1 top artist top tracks
     var trackList1 = await $.ajax({
       url:
         "https://api.spotify.com/v1/artists/" +
@@ -211,8 +263,6 @@ class App extends Component {
         xhr.setRequestHeader("Authorization", "Bearer " + token);
       },
       success: (data) => {
-        console.log(data);
-
         if (!data) {
           this.setState({
             no_data: true,
@@ -222,6 +272,7 @@ class App extends Component {
       },
     });
 
+    // get #2 top artist top tracks
     var trackList2 = await $.ajax({
       url:
         "https://api.spotify.com/v1/artists/" +
@@ -232,7 +283,6 @@ class App extends Component {
         xhr.setRequestHeader("Authorization", "Bearer " + token);
       },
       success: (data) => {
-        console.log(data);
         if (!data) {
           this.setState({
             no_data: true,
@@ -242,6 +292,7 @@ class App extends Component {
       },
     });
 
+    // get #3 top artist top tracks
     var trackList3 = await $.ajax({
       url:
         "https://api.spotify.com/v1/artists/" +
@@ -252,7 +303,6 @@ class App extends Component {
         xhr.setRequestHeader("Authorization", "Bearer " + token);
       },
       success: (data) => {
-        console.log(data);
         if (!data) {
           this.setState({
             no_data: true,
@@ -262,24 +312,22 @@ class App extends Component {
       },
     });
 
+    // get Artist URI from each api call
     var tracklistID1 = trackList1.tracks.map((element) => element.uri);
     var tracklistID2 = trackList2.tracks.map((element) => element.uri);
     var tracklistID3 = trackList3.tracks.map((element) => element.uri);
 
+    // compiled tracklist from all 3 top artists
     var tracklistData = tracklistID1.concat(tracklistID2, tracklistID3);
 
-    console.log(tracklistData);
-
+    // data to send as POST call
     var playlistData = {
       name: playlistName,
       description: playlistDescription,
       public: playlistPrivacy,
     };
 
-    // console.log(trackList);
-
-    console.log(playlistData);
-
+    // create playlist for user
     var playlistID = await $.ajax({
       url: "https://api.spotify.com/v1/users/" + userID + "/playlists",
       type: "POST",
@@ -290,12 +338,10 @@ class App extends Component {
         xhr.setRequestHeader("content-Type", "application/json");
       },
       success: (data) => {
-        console.log(data);
         this.setState({
           playlistItems: data.id,
           no_data: false,
         });
-        console.log(data.id);
         return;
       },
       error: function (err) {
@@ -305,6 +351,7 @@ class App extends Component {
       },
     });
 
+    // add tracks to created playlist
     $.ajax({
       url: "https://api.spotify.com/v1/playlists/" + playlistID.id + "/tracks",
       type: "POST",
@@ -315,7 +362,6 @@ class App extends Component {
         xhr.setRequestHeader("content-Type", "application/json");
       },
       success: (data) => {
-        console.log(data);
         alert("playlist made! check spotify :)");
       },
       error: function (err) {
@@ -334,24 +380,19 @@ class App extends Component {
     token,
     songItems
   ) {
-    // console.log(playlistName);
-    // console.log(token);
-    console.log(songItems);
+    // API call to make Top Songs Playlist
 
-    console.log(playlistPrivacy);
+    //get URI
     var songTracklist = songItems.map((element) => element.uri);
 
+    // data to send as POST call
     var playlistData = {
       name: playlistName,
       description: playlistDescription,
       public: playlistPrivacy,
     };
 
-    console.log(playlistPrivacy);
-    // console.log(trackList);
-
-    console.log(playlistData);
-
+    // create playlist for user
     var playlistID = await $.ajax({
       url: "https://api.spotify.com/v1/users/" + userID + "/playlists",
       type: "POST",
@@ -371,6 +412,7 @@ class App extends Component {
       },
     });
 
+    // add tracks to created playlist
     $.ajax({
       url: "https://api.spotify.com/v1/playlists/" + playlistID.id + "/tracks",
       type: "POST",
@@ -381,7 +423,6 @@ class App extends Component {
         xhr.setRequestHeader("content-Type", "application/json");
       },
       success: (data) => {
-        console.log(data);
         alert("playlist made! check spotify :)");
       },
       error: function (err) {
@@ -400,22 +441,19 @@ class App extends Component {
     token,
     tbArtistTracks
   ) {
-    // console.log(playlistName);
-    // console.log(token);
-    console.log(tbArtistTracks);
+    // API call to make Throwback Songs Playlist
 
+    //get URI
     var throwbackTracklist = tbArtistTracks.map((element) => element.uri);
 
+    // data to send as POST call
     var playlistData = {
       name: playlistName,
       description: playlistDescription,
       public: playlistPrivacy,
     };
 
-    // console.log(trackList);
-
-    console.log(playlistData);
-
+    // create playlist for user
     var playlistID = await $.ajax({
       url: "https://api.spotify.com/v1/users/" + userID + "/playlists",
       type: "POST",
@@ -435,6 +473,7 @@ class App extends Component {
       },
     });
 
+    // add tracks to created playlist
     $.ajax({
       url: "https://api.spotify.com/v1/playlists/" + playlistID.id + "/tracks",
       type: "POST",
@@ -445,7 +484,6 @@ class App extends Component {
         xhr.setRequestHeader("content-Type", "application/json");
       },
       success: (data) => {
-        console.log(data);
         alert("playlist made! check spotify :)");
       },
       error: function (err) {
@@ -457,7 +495,14 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.songItems !== "" && this.state.artistItems !== "") {
+    //null check
+    if (
+      this.state.songItems[0] &&
+      this.state.artistItems[0] &&
+      this.state.audioFeatures[0] &&
+      this.state.tbAudioFeatures[0] &&
+      this.state.tbArtistTracks[0]
+    ) {
       var mainPage = (
         <MainPage
           songItems={this.state.songItems}
@@ -471,10 +516,12 @@ class App extends Component {
           token={this.state.token}
           makeTopSongsPlaylist={this.makeTopSongsPlaylist}
           makeThrowbackPlaylist={this.makeThrowbackPlaylist}
+          audioFeatures={this.state.audioFeatures}
+          tbAudioFeatures={this.state.tbAudioFeatures}
         />
       );
     } else {
-      var mainPage = null;
+      var mainPage = <ErrorPage />;
     }
 
     return (

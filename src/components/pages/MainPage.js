@@ -6,7 +6,7 @@ import CreateTopSongPlaylist from "../playlists/CreateTopSongPlaylist";
 import RenderCards from "../cards/RenderCards";
 import CreateThrowbackPlaylist from "../playlists/CreateThrowbackPlaylist";
 import AboutMe from "../AboutMe";
-
+import UserAudioStats from "../UserAudioStats";
 
 const theme = {
   global: {
@@ -58,7 +58,7 @@ const MainPage = (props) => {
       <Box pad="large" background="accent-3">
         <Box direction="row-responsive" align="center">
           <Box basis="3/4" direction="column">
-            <Heading alignSelf="left"> Your Current Top Artists </Heading>
+            <Heading> Your Current Top Artists </Heading>
             These peeps have you bopping all day everyday
           </Box>
           <Box basis="1/4" align="end">
@@ -83,9 +83,9 @@ const MainPage = (props) => {
             <Text size="xlarge" margin="medium" weight="bold">
               #1
             </Text>
-            <Avatar id="avatar"
+            <Avatar
+              id="avatar"
               size="300px"
-    
               src={props.artistItems[0]?.images[0].url}
               onClick={() => window.open(props.artistItems[0].uri, "_self")}
             />
@@ -120,13 +120,27 @@ const MainPage = (props) => {
               {props.artistItems[2]?.name}{" "}
             </Text>
           </Box>
-          {console.log(props.tbArtistItems)}
         </Box>
       </Box>
+      <Box
+        pad="large"
+        direction="row-responsive"
+        alignContent="center"
+        animation="slideUp"
+        align="center"
+        justify="center"
+        background="neutral-3"
+      >
+        <UserAudioStats
+          audioFeatures={props.audioFeatures}
+          tbAudioFeatures={props.tbAudioFeatures}
+        />
+      </Box>
+
       <Box pad="large" background="accent-1">
         <Box direction="row-responsive" align="center">
           <Box basis="3/4" direction="column">
-            <Heading textAlign="left"> Your Current Top Songs </Heading>
+            <Heading> Your Current Top Songs </Heading>
             <Text>Your current bops </Text>
           </Box>
           <Box basis="1/4" align="end">
@@ -143,7 +157,6 @@ const MainPage = (props) => {
           direction="row-responsive"
           pad="medium"
           gap="medium"
-          responsive="true"
         >
           {props.songItems.slice(0, 5).map(RenderCards)}
         </Box>
@@ -152,7 +165,6 @@ const MainPage = (props) => {
           direction="row-responsive"
           pad="medium"
           gap="medium"
-          responsive="true"
         >
           {props.songItems.slice(6, 11).map(RenderCards)}
         </Box>
@@ -161,7 +173,6 @@ const MainPage = (props) => {
           direction="row-responsive"
           pad="medium"
           gap="medium"
-          responsive="true"
         >
           {props.songItems.slice(12, 17).map(RenderCards)}
         </Box>
@@ -169,7 +180,7 @@ const MainPage = (props) => {
       <Box pad="large" background="accent-2">
         <Box direction="row-responsive" align="center">
           <Box basis="3/4" direction="column">
-            <Heading textAlign="right"> Throwback Suggestions </Heading>
+            <Heading> Throwback Suggestions </Heading>
             <Text>
               {" "}
               Remember these classics you used to listen to? (You must've been
@@ -190,7 +201,6 @@ const MainPage = (props) => {
           direction="row-responsive"
           pad="medium"
           gap="medium"
-          responsive="true"
         >
           {props.tbArtistTracks
             .filter(filterDates)
@@ -202,7 +212,6 @@ const MainPage = (props) => {
           direction="row-responsive"
           pad="medium"
           gap="medium"
-          responsive="true"
         >
           {props.tbArtistTracks
             .filter(filterDates)
@@ -214,7 +223,6 @@ const MainPage = (props) => {
           direction="row-responsive"
           pad="medium"
           gap="medium"
-          responsive="true"
         >
           {props.tbArtistTracks
             .filter(filterDates)
