@@ -8,7 +8,7 @@ import CreateThrowbackPlaylist from "../playlists/CreateThrowbackPlaylist";
 import AboutMe from "../AboutMe";
 import UserAudioStats from "../UserAudioStats";
 import TopSongsShare from "../sharing/TopSongsShare";
-
+import ThrowbackShare from "../sharing/ThrowbackShare";
 
 const theme = {
   global: {
@@ -52,7 +52,7 @@ const MainPage = (props) => {
       </Header>
       <Box height="large" align="center" animation="fadeIn" justify="center">
         <Heading>Hello {props.username} </Heading>
-        <Text>I know all about you ;)</Text>
+        <Text>Be sure to share this with your friends :)</Text>
         <Box margin={{ vertical: "150px" }}>
           <Down />
         </Box>
@@ -161,7 +161,7 @@ const MainPage = (props) => {
               songItems={props.songItems}
               makeTopSongsPlaylist={props.makeTopSongsPlaylist}
             />
-            <TopSongsShare/>
+            <TopSongsShare />
           </Box>
         </Box>
         <Box
@@ -200,23 +200,23 @@ const MainPage = (props) => {
           {props.songItems.slice(20, 25).map(RenderCards)}
         </Box>
       </Box>
-      <Box pad="large" background="#cf93c5">
+      <Box id="throwbacks" pad="large" background="#cf93c5">
         <Box direction="row-responsive" align="center">
           <Box basis="3/4" direction="column">
-            <Heading> Throwback Suggestions </Heading>
+            <Heading> Your Throwbacks </Heading>
             <Text>
-              {" "}
               Remember these classics you used to listen to? (You must've been
               an active Spotify member since 2016 for this to work properly){" "}
             </Text>
           </Box>
-          <Box basis="1/4" align="end">
+          <Box direction="column" gap="small" basis="1/4" align="end">
             <CreateThrowbackPlaylist
               userID={props.userID}
               token={props.token}
               tbArtistTracks={props.tbArtistTracks}
               makeThrowbackPlaylist={props.makeThrowbackPlaylist}
             />
+            <ThrowbackShare />
           </Box>
         </Box>
         <Box

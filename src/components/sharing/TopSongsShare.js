@@ -9,12 +9,13 @@ const TopSongsShare = () => {
 
   function imageTopSongs () {
     html2canvas(document.getElementById("topsongs"), {
-      width:1080,
-      height:1920
-    }).then((canvas) => {
-      var image = canvas.toDataURL('image/png', 1.0).replace("image/png", "image/octet-stream");
-      console.log(image); 
-      window.open(image);
+      height: 1350
+    }
+    ).then((canvas) => {
+      var a = document.createElement('a');
+      a.href = canvas.toDataURL("image/png");
+      a.download = "yourtopsongs.png";
+      a.click();
   });
 }
 

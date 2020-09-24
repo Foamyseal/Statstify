@@ -44,8 +44,8 @@ const UserAudioStats = (props) => {
 
   return (
     <Box direction="row-responsive" gap="medium">
-      <Box direction="column" gap="large">
-        <Text margin={{"top": "72px"}}> Average Hypeness Level </Text>
+      <Box direction="column" gap="large" >
+        <Text margin={{"top": "72px"}}> Song Energy Level </Text>
         <Text> How danceable is your music? </Text>
         <Text> Average Song Tempo </Text>
       </Box>
