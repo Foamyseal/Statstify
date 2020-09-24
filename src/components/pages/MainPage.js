@@ -7,6 +7,8 @@ import RenderCards from "../cards/RenderCards";
 import CreateThrowbackPlaylist from "../playlists/CreateThrowbackPlaylist";
 import AboutMe from "../AboutMe";
 import UserAudioStats from "../UserAudioStats";
+import TopSongsShare from "../sharing/TopSongsShare";
+
 
 const theme = {
   global: {
@@ -40,9 +42,9 @@ const MainPage = (props) => {
         <Box
           direction="row-responsive"
           align="end"
-          basis="1/4"
+          basis="1/3"
           justify="end"
-          gap="small"
+          gap="small" 
         >
           <Avatar size="medium" src={avatarNullCheck()} />
           <AboutMe />
@@ -71,21 +73,20 @@ const MainPage = (props) => {
           </Box>
         </Box>
         <Box
-          pad="large"
+          height="auto"
           direction="row-responsive"
           alignContent="center"
-          animation="slideUp"
           align="center"
           justify="center"
-          gap="300px"
         >
-          <Box direction="column" align="center" gap="small">
+        <Box pad="xlarge" height="auto">
+          <Box direction="column" align="center" gap="small" height="auto">
             <Text size="xlarge" margin="medium" weight="bold">
               #1
             </Text>
             <Avatar
               id="avatar"
-              size="300px"
+              size="250px"
               src={props.artistItems[0]?.images[0].url}
               onClick={() => window.open(props.artistItems[0].uri, "_self")}
             />
@@ -93,12 +94,15 @@ const MainPage = (props) => {
               {props.artistItems[0]?.name}{" "}
             </Text>
           </Box>
-          <Box direction="column" align="center" gap="small">
+          </Box>
+          <Box pad="xlarge">
+          <Box direction="column" align="center" gap="small" fill="vertical
+          ">
             <Text size="xlarge" margin="medium" weight="bold">
               #2
             </Text>
             <Avatar
-              size="300px"
+              size="250px"
               src={props.artistItems[1]?.images[0].url}
               onClick={() => window.open(props.artistItems[1].uri, "_self")}
             />
@@ -107,18 +111,21 @@ const MainPage = (props) => {
               {props.artistItems[1]?.name}
             </Text>
           </Box>
-          <Box direction="column" align="center" gap="small">
+          </Box>
+          <Box pad="xlarge">
+          <Box direction="column" align="center" gap="small" height="auto">
             <Text size="xlarge" margin="medium" weight="bold">
               #3
             </Text>
             <Avatar
-              size="300px"
+              size="250px"
               src={props.artistItems[2]?.images[0].url}
               onClick={() => window.open(props.artistItems[2].uri, "_self")}
             />
             <Text size="large" margin="medium" weight="bold">
               {props.artistItems[2]?.name}{" "}
             </Text>
+          </Box>
           </Box>
         </Box>
       </Box>
@@ -141,26 +148,26 @@ const MainPage = (props) => {
       </Box>
       </Box>
 
-      <Box pad="large" background="accent-1">
+      <Box id="topsongs" pad="large" background="accent-1">
         <Box direction="row-responsive" align="center">
           <Box basis="3/4" direction="column">
             <Heading> Your Current Top Songs </Heading>
             <Text>Your current bops </Text>
           </Box>
-          <Box basis="1/4" align="end">
+          <Box direction="column" gap="small" basis="1/4" align="end">
             <CreateTopSongPlaylist
               userID={props.userID}
               token={props.token}
               songItems={props.songItems}
               makeTopSongsPlaylist={props.makeTopSongsPlaylist}
             />
+            <TopSongsShare/>
           </Box>
         </Box>
         <Box
           align="center"
           direction="row-responsive"
           pad="medium"
-          gap="medium"
         >
           {props.songItems.slice(0, 5).map(RenderCards)}
         </Box>
@@ -168,20 +175,32 @@ const MainPage = (props) => {
           align="center"
           direction="row-responsive"
           pad="medium"
-          gap="medium"
         >
-          {props.songItems.slice(6, 11).map(RenderCards)}
+          {props.songItems.slice(5, 10).map(RenderCards)}
         </Box>
         <Box
           align="center"
           direction="row-responsive"
           pad="medium"
-          gap="medium"
         >
-          {props.songItems.slice(12, 17).map(RenderCards)}
+          {props.songItems.slice(10, 15).map(RenderCards)}
+        </Box>
+        <Box
+          align="center"
+          direction="row-responsive"
+          pad="medium"
+        >
+          {props.songItems.slice(15, 20).map(RenderCards)}
+        </Box>
+        <Box
+          align="center"
+          direction="row-responsive"
+          pad="medium"
+        >
+          {props.songItems.slice(20, 25).map(RenderCards)}
         </Box>
       </Box>
-      <Box pad="large" background="accent-2">
+      <Box pad="large" background="#cf93c5">
         <Box direction="row-responsive" align="center">
           <Box basis="3/4" direction="column">
             <Heading> Throwback Suggestions </Heading>
@@ -204,7 +223,6 @@ const MainPage = (props) => {
           align="center"
           direction="row-responsive"
           pad="medium"
-          gap="medium"
         >
           {props.tbArtistTracks
             .filter(filterDates)
@@ -215,26 +233,44 @@ const MainPage = (props) => {
           align="center"
           direction="row-responsive"
           pad="medium"
-          gap="medium"
         >
           {props.tbArtistTracks
             .filter(filterDates)
-            .slice(6, 11)
+            .slice(5, 10)
             .map(RenderCards)}
         </Box>
         <Box
           align="center"
           direction="row-responsive"
           pad="medium"
-          gap="medium"
         >
           {props.tbArtistTracks
             .filter(filterDates)
-            .slice(12, 17)
+            .slice(10, 15)
+            .map(RenderCards)}
+        </Box>
+        <Box
+          align="center"
+          direction="row-responsive"
+          pad="medium"
+        >
+          {props.tbArtistTracks
+            .filter(filterDates)
+            .slice(15, 20)
+            .map(RenderCards)}
+        </Box>
+        <Box
+          align="center"
+          direction="row-responsive"
+          pad="medium"
+        >
+          {props.tbArtistTracks
+            .filter(filterDates)
+            .slice(20, 25)
             .map(RenderCards)}
         </Box>
       </Box>
-      <Footer align="center" pad="medium">
+      <Footer align="center" pad="small">
         <Text>Copyright Martin Au-yeung</Text>
       </Footer>
     </Grommet>

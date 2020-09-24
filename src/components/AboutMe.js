@@ -15,16 +15,19 @@ const AboutMe = (props) => {
           onClickOutside={() => setShow(false)}
         >
           <Box align="center" pad="large">
-            <Heading> About this Project </Heading>
+            <Heading textAlign="center"> About this Project </Heading>
             <Box align="center" gap="medium" pad="medium">
-              <Text pad="medium">
-                This project was created by Martin Au-yeung{" "}
+              <Text  textAlign="center">
+                Created by Martin Au-yeung
               </Text>
-              <Text pad="medium">
-                It is meant to find out more about what you listen/listened to{" "}
+              <Text textAlign="center">
+                Find out your past throwbacks, current top artists and songs. 
+              </Text>
+              <Text textAlign="center">
+                Share them on Instagram or make a playlist out of them!
               </Text>
             </Box>
-            <Text>
+            <Text textAlign="center">
               {" "}
               To logout, simply close the browser or refresh the page.
             </Text>
@@ -55,6 +58,11 @@ const AboutMe = (props) => {
                 target="_blank"
               />
             </Box>
+            <Button
+                width="large"
+                label="close"
+                onClick={() => setShow(false)}
+              />
           </Box>
         </Layer>
       )}

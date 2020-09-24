@@ -27,27 +27,25 @@ const RenderCards = (card, index) => {
       align="center"
       pad="medium"
       width="medium"
-      height="medium"
     >
       <Card
-        fill="true"
+        fill="horizontal"
+        height="small"
         id="overlay"
         key={index}
         background={{ image: "url(" + cardImage + ")", opacity: "medium" }}
         onClick={() => window.open(card.uri, "_self")}
       >
-        <CardHeader pad="medium"> </CardHeader>
+        <CardHeader pad="small"> </CardHeader>
         <CardBody
           alignContent="end"
-          height="medium"
           margin={{ bottom: "large" }}
           pad="medium"
         >
           <Text color="white">{[card.name]} </Text>
         </CardBody>
-        <CardFooter pad="small" background="light-1">
-          <Avatar size="small" image={cardImage} />
-          <Text>{cardComponent}</Text>
+        <CardFooter pad="xsmall" justify="center" align="center" background="#dedcd5">
+          <Text textAlign="center" size="small">{cardComponent}</Text>
         </CardFooter>
       </Card>
     </Box>
