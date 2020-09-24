@@ -5,7 +5,7 @@ import html2canvas from "html2canvas";
 const ThrowbackShare = () => {
   function imageThrowbackSongs() {
     html2canvas(document.getElementById("throwbacks"), {
-      height: 1350,
+      height: 1340,
     }).then((canvas) => {
       var a = document.createElement("a");
       a.href = canvas.toDataURL("image/png");

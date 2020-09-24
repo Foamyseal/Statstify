@@ -3,7 +3,7 @@ import { Grommet, Heading, Button, Box, Text, Main } from "grommet";
 
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 const clientId = "4218105ab20743ea80387bf1a7f82bf9";
-const redirectUri = "https://lullaby-spotify.herokuapp.com/";
+const redirectUri = "http://localhost:3000/";
 const scopes = [
   "user-top-read",
   "playlist-modify-private",
@@ -34,7 +34,7 @@ const LoginPage = (props) => {
       >
         <Box margin={{ vertical: "300px" }} align="center" justify="center">
           <Heading size="large" align="center">
-            Lullaby
+            Statstify
           </Heading>
           <Text level="4" margin={{ bottom: "20px" }} align="center">
             Created by Martin Au-yeung

@@ -31,9 +31,9 @@ const RenderCards = (card, index) => {
       <Card
         fill="horizontal"
         height="small"
-        id="overlay"
+        background={{image: "url(" + cardImage + ")", opacity: "medium"}}
+        style={{backgroundColor: "black"}}
         key={index}
-        background={{ image: "url(" + cardImage + ")", opacity: "medium" }}
         onClick={() => window.open(card.uri, "_self")}
       >
         <CardHeader pad="small"> </CardHeader>

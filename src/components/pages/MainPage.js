@@ -9,6 +9,7 @@ import AboutMe from "../AboutMe";
 import UserAudioStats from "../UserAudioStats";
 import TopSongsShare from "../sharing/TopSongsShare";
 import ThrowbackShare from "../sharing/ThrowbackShare";
+import TopArtistsShare from "../sharing/TopArtistShare";
 
 const theme = {
   global: {
@@ -38,11 +39,10 @@ const MainPage = (props) => {
   return (
     <Grommet theme={theme} full>
       <Header gap="medium" margin="small">
-        Lullaby
+        Statstify
         <Box
           direction="row-responsive"
           align="end"
-          basis="1/3"
           justify="end"
           gap="small" 
         >
@@ -57,19 +57,21 @@ const MainPage = (props) => {
           <Down />
         </Box>
       </Box>
-      <Box pad="large" background="accent-3">
+      <Box id="topartists" pad="large" background="accent-3">
         <Box direction="row-responsive" align="center">
           <Box basis="3/4" direction="column">
             <Heading> Your Current Top Artists </Heading>
-            These peeps have you bopping all day everyday
+            These peeps have you bopping all day everyday.
+            <Text>Presented by Statstify</Text>
           </Box>
-          <Box basis="1/4" align="end">
+          <Box gap="small" direction="column" basis="1/4" align="end">
             <CreateArtistPlaylists
               userID={props.userID}
               token={props.token}
               artistItems={props.artistItems}
               makeTopArtistPlaylist={props.makeTopArtistPlaylist}
             />
+            <TopArtistsShare />
           </Box>
         </Box>
         <Box
@@ -79,7 +81,7 @@ const MainPage = (props) => {
           align="center"
           justify="center"
         >
-        <Box pad="xlarge" height="auto">
+        <Box pad="large" height="auto">
           <Box direction="column" align="center" gap="small" height="auto">
             <Text size="xlarge" margin="medium" weight="bold">
               #1
@@ -95,7 +97,7 @@ const MainPage = (props) => {
             </Text>
           </Box>
           </Box>
-          <Box pad="xlarge">
+          <Box pad="large">
           <Box direction="column" align="center" gap="small" fill="vertical
           ">
             <Text size="xlarge" margin="medium" weight="bold">
@@ -112,7 +114,7 @@ const MainPage = (props) => {
             </Text>
           </Box>
           </Box>
-          <Box pad="xlarge">
+          <Box pad="large">
           <Box direction="column" align="center" gap="small" height="auto">
             <Text size="xlarge" margin="medium" weight="bold">
               #3
@@ -152,7 +154,7 @@ const MainPage = (props) => {
         <Box direction="row-responsive" align="center">
           <Box basis="3/4" direction="column">
             <Heading> Your Current Top Songs </Heading>
-            <Text>Your current bops </Text>
+            <Text>Your current bops presented by Statstify</Text>
           </Box>
           <Box direction="column" gap="small" basis="1/4" align="end">
             <CreateTopSongPlaylist
@@ -205,8 +207,11 @@ const MainPage = (props) => {
           <Box basis="3/4" direction="column">
             <Heading> Your Throwbacks </Heading>
             <Text>
-              Remember these classics you used to listen to? (You must've been
+              Remember these classics? (You must been
               an active Spotify member since 2016 for this to work properly){" "}
+            </Text>
+            <Text>
+              Presented by Statstify
             </Text>
           </Box>
           <Box direction="column" gap="small" basis="1/4" align="end">

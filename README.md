@@ -1,4 +1,4 @@
-# Lullaby 
+# Statstify
 Spotify Statistics and Playlist Creator.
 
 ## Purpose: 
@@ -7,6 +7,8 @@ and songs. Also, find out your throwback songs that you might remember!
 
 Added Feature!! (09-23) 
 Share your top 5 songs or top 5 throwbacks on Instagram!
+
+Previously known as Lullaby, on heroku as lullaby-spotify.herokuapp.com
 
 ## To launch locally
 

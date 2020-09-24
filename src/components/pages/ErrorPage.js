@@ -31,7 +31,7 @@ const ErrorPage = (props) => {
             You must currently be an active Spotify user for this app to work. 
           </Text>
           <Text level="4" margin={{ bottom: "20px" }} align="center">
-          Open an issues request on https://github.com/Foamyseal/Lullaby if you believe this is not right.
+          Open an issues request on https://github.com/Foamyseal/Statstify if you believe this is not right.
           </Text>
         </Box>
       </Main>

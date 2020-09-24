@@ -17,14 +17,28 @@ const AboutMe = (props) => {
           <Box align="center" pad="large">
             <Heading textAlign="center"> About this Project </Heading>
             <Box align="center" gap="medium" pad="medium">
-              <Text  textAlign="center">
-                Created by Martin Au-yeung
-              </Text>
+              <Text textAlign="center">Created by Martin Au-yeung</Text>
               <Text textAlign="center">
-                Find out your past throwbacks, current top artists and songs. 
+                Find out your past throwbacks, current top artists and songs.
               </Text>
               <Text textAlign="center">
                 Share them on Instagram or make a playlist out of them!
+              </Text>
+              <Text textAlign="center">
+                {" "}
+                Although to view your stats all properly, I would suggest not
+                using a mobile browser for best experience{" "}
+              </Text>
+              <Text textAlign="center">
+                {" "}
+                There is a known issue with the sharing songs not showing background image. 
+                
+              </Text>
+              <Text textAlign="center">
+                This is done on purpose as there is a bug with html2canvas that prevents images from having an opacity setting, making the title text unreadable.
+              </Text>
+              <Text textAlign="center">
+               Please report any further issues to the GitHub repo.
               </Text>
             </Box>
             <Text textAlign="center">
@@ -54,15 +68,15 @@ const AboutMe = (props) => {
               <Button
                 primary
                 label="GitHub"
-                href="https://github.com/Foamyseal/Lullaby/"
+                href="https://github.com/Foamyseal/Statstify/"
                 target="_blank"
               />
             </Box>
             <Button
-                width="large"
-                label="close"
-                onClick={() => setShow(false)}
-              />
+              width="large"
+              label="close"
+              onClick={() => setShow(false)}
+            />
           </Box>
         </Layer>
       )}
