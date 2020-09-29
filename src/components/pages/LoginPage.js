@@ -3,7 +3,7 @@ import { Grommet, Heading, Button, Box, Text, Main } from "grommet";
 
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 const clientId = "4218105ab20743ea80387bf1a7f82bf9";
-const redirectUri = "https://statstify.herokuapp.com/";
+const redirectUri = "http://localhost:3000/";
 const scopes = [
   "user-top-read",
   "playlist-modify-private",

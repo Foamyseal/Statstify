@@ -32,7 +32,6 @@ const AboutMe = (props) => {
               <Text textAlign="center">
                 {" "}
                 There is a known issue with the sharing songs not showing background image. 
-                
               </Text>
               <Text textAlign="center">
                 This is done on purpose as there is a bug with html2canvas that prevents images from having an opacity setting, making the title text unreadable.
@@ -45,19 +44,6 @@ const AboutMe = (props) => {
               {" "}
               To logout, simply close the browser or refresh the page.
             </Text>
-            <Box align="center" direction="column">
-              <Text textAlign="center">
-                {" "}
-                No data is saved on servers, and the data you see is only
-                presented to you when you login.
-              </Text>
-              <Text textAlign="center">
-                {" "}
-                Your login gives you a one-time use access token that refreshes
-                everytime you close or refresh the page, requiring you to login
-                again if you chose to do so.
-              </Text>
-            </Box>
             <Box direction="row-responsive" gap="medium" pad="medium">
               <Button
                 primary
