@@ -12,8 +12,8 @@
     "jquery": "^3.5.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3",
-    "serve": "^11.3.2",
+    "react-scripts": "5.0.1",
+    "serve": "^14.2.0",
     "styled-components": "^5.1.1"
   },
   "scripts": {
